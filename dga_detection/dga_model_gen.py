@@ -233,11 +233,11 @@ def main():
         all_domains['diff'] = all_domains['alexa_grams'] - all_domains['word_grams']
 
         # The table below shows those domain names that are more 'dictionary' and less 'web'
-        print all_domains.sort(['diff'], ascending=True).head(10)
+        print all_domains.sort_values(by=['diff'], ascending=True).head(10)
 
         # The table below shows those domain names that are more 'web' and less 'dictionary'
         # Good O' web....
-        print all_domains.sort(['diff'], ascending=False).head(50)
+        print all_domains.sort_values(by=['diff'], ascending=False).head(50)
 
         # Lets look at which Legit domains are scoring low on both alexa and word gram count
         weird_cond = (all_domains['class']=='legit') & (all_domains['word_grams']<3) & (all_domains['alexa_grams']<2)
@@ -270,7 +270,7 @@ def main():
 
         # Random Forest is a popular ensemble machine learning classifier.
         # http://scikit-learn.org/dev/modules/generated/sklearn.ensemble.RandomForestClassifier.html
-        clf = sklearn.ensemble.RandomForestClassifier(n_estimators=20, compute_importances=True) # Trees in the forest
+        clf = sklearn.ensemble.RandomForestClassifier(n_estimators=20) # Trees in the forest
 
 
         # Train on a 80/20 split
